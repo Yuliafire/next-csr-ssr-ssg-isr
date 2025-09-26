@@ -6,15 +6,23 @@ import { fetcher, mutationFetcher } from '@/lib/api';
 import type { User } from '@/types';
 
 export function useUser() {
-  const { data, error, isLoading, isValidating, mutate } = useSWR<User[]>(
+  const { data, error, isLoading, isValidating } = useSWR<User[]>(
     'https://jsonplaceholder.typicode.com/users',
     fetcher,
     {
-      revalidateOnFocus: false, // Disable if causing loops
-      dedupingInterval: 5000,
+      revalidateOnFocus: true,
+      revalidateOnReconnect: true,
+      // dedupingInterval: 2000,
+      // errorRetryCount: 3,
     }
   );
-  return { data, error, isLoading, isValidating, mutate };
+
+  return {
+    users: data,
+    isLoading,
+    isError: error,
+    isValidating,
+  };
 }
 
 export function usePostData() {
