@@ -10,9 +10,9 @@ import Modal from '@/components/ui/modal/Modal';
 import Form from '@/components/ui/form/Form';
 
 interface ClientPageProps {
-  users: User[];
-  title: string;
-  pageType: string;
+  readonly users: User[];
+  readonly title: string;
+  readonly pageType: string;
 }
 
 export default function ClientPage({

@@ -6,24 +6,17 @@ import { fetcher, mutationFetcher } from '@/lib/api';
 import type { User } from '@/types';
 
 export function useUser() {
-  const { data, error, isLoading, isValidating } = useSWR<User[]>(
-    'https://jsonplaceholder.typicode.com/users',
+  const { data, error, isLoading, isValidating, mutate } = useSWR<User[]>(
+    "https://jsonplaceholder.typicode.com/users",
     fetcher,
     {
-      revalidateOnFocus: true,
-      revalidateOnReconnect: true,
-      dedupingInterval: 2000,
-      errorRetryCount: 3,
+      revalidateOnFocus: false, // Disable if causing loops
+      dedupingInterval: 5000,
     }
   );
-
-  return {
-    users: data,
-    isLoading,
-    isError: error,
-    isValidating,
-  };
+  return { data, error, isLoading, isValidating, mutate };
 }
+
 
 export function usePostData() {
   const { trigger, isMutating } = useSWRMutation(

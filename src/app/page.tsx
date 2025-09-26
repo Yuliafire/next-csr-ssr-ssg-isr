@@ -57,7 +57,7 @@ export default function Home() {
             >
               {[...Array(10)].map((_, index) => (
                 <motion.div
-                  key={index}
+                  key={`skeleton-${index}`}
                   className="bg-white p-6 rounded-lg shadow-md animate-pulse"
                 >
                   <div className="h-6 w-32 bg-blue-200 rounded mb-4"></div>

@@ -1,9 +1,8 @@
-// src/components/UserCard.tsx
 import { motion } from 'framer-motion';
 import type { User } from '@/types';
 
 interface UserCardProps {
-  user: User;
+readonly user: User;
 }
 
 export default function UserCard({ user }: UserCardProps) {

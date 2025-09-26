@@ -67,12 +67,6 @@ export default function Form({ onSubmit }: FormProps) {
     },
   });
 
-  // SWR mutation for POST
-  // const { trigger, isMutating } = useSWRMutation(
-  // 'https://jsonplaceholder.typicode.com/posts',
-  // mutationFetcher,
-  // );
-
   const { triggerPost, isSubmitting: isMutating } = usePostData();
 
   const [response, setResponse] = useState<Record<string, unknown> | null>(
@@ -86,7 +80,6 @@ export default function Form({ onSubmit }: FormProps) {
     if (data.file2[0]) formData.append('file2', data.file2[0]);
 
     const result = await triggerPost(formData);
-    // const res = result.data;
     setResponse(result);
     onSubmit(data);
     toast.success('Profile updated successfully!', {
