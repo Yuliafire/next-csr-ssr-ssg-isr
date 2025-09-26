@@ -7,7 +7,7 @@ import type { User } from '@/types';
 
 export function useUser() {
   const { data, error, isLoading, isValidating, mutate } = useSWR<User[]>(
-    "https://jsonplaceholder.typicode.com/users",
+    'https://jsonplaceholder.typicode.com/users',
     fetcher,
     {
       revalidateOnFocus: false, // Disable if causing loops
@@ -16,7 +16,6 @@ export function useUser() {
   );
   return { data, error, isLoading, isValidating, mutate };
 }
-
 
 export function usePostData() {
   const { trigger, isMutating } = useSWRMutation(

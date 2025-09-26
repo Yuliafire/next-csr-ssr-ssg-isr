@@ -32,12 +32,18 @@ export const mutationFetcher = async (
 
 // src/lib/api.ts
 export async function fetchUsers(): Promise<User[]> {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users?_limit=5', { cache: 'force-cache' });
+  const res = await fetch(
+    'https://jsonplaceholder.typicode.com/users?_limit=5',
+    { cache: 'force-cache' }
+  );
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
   return res.json();
 }
 export async function fetchUsersSSR(): Promise<User[]> {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users?_limit=5', { cache: 'no-store' });
+  const res = await fetch(
+    'https://jsonplaceholder.typicode.com/users?_limit=5',
+    { cache: 'no-store' }
+  );
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
   return res.json();
 }

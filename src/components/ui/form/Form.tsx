@@ -49,7 +49,7 @@ const formSchema = yup.object().shape({
 });
 
 interface FormProps {
-  onSubmit: SubmitHandler<FormData>;
+  readonly onSubmit: SubmitHandler<FormData>;
 }
 
 export default function Form({ onSubmit }: FormProps) {
