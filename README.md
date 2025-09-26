@@ -1,2 +1,3 @@
 # next-csr-ssr-ssg-isr
-implementing different rendering modes in Next.js 
+
+implementing different rendering modes in Next.js
