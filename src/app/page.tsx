@@ -14,10 +14,10 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { users, isLoading, isError, isValidating } = useUser();
 
-  const handleFormSubmit: SubmitHandler<FormData> = (data) => {
-    console.log('Form submitted from Home:', data);
+  const handleFormSubmit: SubmitHandler<FormData> = () => {
+    setIsModalOpen(false);
   };
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
       <Toaster position="top-right" />
