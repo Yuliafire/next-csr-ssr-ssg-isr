@@ -25,7 +25,7 @@ export function useUser() {
 
 export function usePostData() {
   const { trigger, isMutating } = useSWRMutation(
-    'https://jsonplaceholder.typicode.com/posts',
+    'https://jsonplaceholder.typicode.com/users',
     mutationFetcher
   );
 
