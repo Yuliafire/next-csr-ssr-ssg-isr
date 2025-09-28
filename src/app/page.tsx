@@ -18,6 +18,66 @@ export default function Home() {
     setIsModalOpen(false);
   };
 
+  let content = null;
+  if (isLoading || isValidating) {
+    content = (
+      <motion.div
+        key="skeleton"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {[...Array(10)].map((_, index) => (
+          <motion.div
+            key={`skeleton-${index}`}
+            className="bg-white p-6 rounded-lg shadow-md animate-pulse"
+          >
+            <div className="h-6 w-32 bg-blue-200 rounded mb-4"></div>
+            <div className="h-4 w-48 bg-blue-200 rounded mb-2"></div>
+            <div className="h-4 w-36 bg-blue-200 rounded"></div>
+          </motion.div>
+        ))}
+      </motion.div>
+    );
+  } else if (isError) {
+    content = (
+      <motion.div
+        key="error"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="text-center text-red-500"
+      >
+        Failed to load users: {isError.message}
+      </motion.div>
+    );
+  } else {
+    content = (
+      <motion.div
+        key="data"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {users?.map((user, index) => (
+          <motion.div
+            key={user.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+          >
+            <UserCard user={user} />
+          </motion.div>
+        ))}
+      </motion.div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
       <Toaster position="top-right" />
@@ -45,60 +105,7 @@ export default function Home() {
       </motion.section>
 
       <section className="container mx-auto px-4 py-8" aria-busy={isLoading}>
-        <AnimatePresence mode="wait">
-          {isLoading || isValidating ? (
-            <motion.div
-              key="skeleton"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {[...Array(10)].map((_, index) => (
-                <motion.div
-                  key={`skeleton-${index}`}
-                  className="bg-white p-6 rounded-lg shadow-md animate-pulse"
-                >
-                  <div className="h-6 w-32 bg-blue-200 rounded mb-4"></div>
-                  <div className="h-4 w-48 bg-blue-200 rounded mb-2"></div>
-                  <div className="h-4 w-36 bg-blue-200 rounded"></div>
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : isError ? (
-            <motion.div
-              key="error"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-center text-red-500"
-            >
-              Failed to load users: {isError.message}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="data"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {users?.map((user, index) => (
-                <motion.div
-                  key={user.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <UserCard user={user} />
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <AnimatePresence mode="wait">{content}</AnimatePresence>
       </section>
 
       <Modal

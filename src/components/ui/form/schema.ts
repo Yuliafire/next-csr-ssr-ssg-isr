@@ -13,7 +13,7 @@ export const formSchema: yup.ObjectSchema<FormData> = yup.object().shape({
     .test(
       'size',
       'Max 2MB',
-      (value) => value && value[0] && value[0].size <= 2 * 1024 * 1024
+      (value) => !value?.[0]?.size || value[0].size <= 2 * 1024 * 1024
     )
     .test(
       'type',
@@ -29,7 +29,7 @@ export const formSchema: yup.ObjectSchema<FormData> = yup.object().shape({
     .test(
       'size',
       'Max 2MB',
-      (value) => value && value[0] && value[0].size <= 2 * 1024 * 1024
+      (value) => !value?.[0]?.size || value[0].size <= 2 * 1024 * 1024
     )
     .test(
       'type',
