@@ -3,12 +3,6 @@ import type { User } from '@/types';
 export const fetcher = (...args: Parameters<typeof fetch>) =>
   fetch(...args).then((res) => res.json());
 
-// export const mutationFetcher = (url: string, { arg }: { arg: FormData }) =>
-// fetch(url, {
-// method: 'POST',
-// body: arg,
-// }).then((res) => res.json());
-//
 
 export const mutationFetcher = async (
   url: string,
@@ -30,19 +24,10 @@ export const mutationFetcher = async (
   return res.json();
 };
 
-// src/lib/api.ts
-export async function fetchUsers(): Promise<User[]> {
+export async function fetchUsers(cacheOption: RequestCache = 'force-cache'): Promise<User[]> {
   const res = await fetch(
     'https://jsonplaceholder.typicode.com/users?_limit=5',
-    { cache: 'force-cache' }
-  );
-  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-  return res.json();
-}
-export async function fetchUsersSSR(): Promise<User[]> {
-  const res = await fetch(
-    'https://jsonplaceholder.typicode.com/users?_limit=5',
-    { cache: 'no-store' }
+    { cache: cacheOption }
   );
   if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
   return res.json();

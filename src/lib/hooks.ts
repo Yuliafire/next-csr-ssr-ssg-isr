@@ -12,8 +12,6 @@ export function useUser() {
     {
       revalidateOnFocus: true,
       revalidateOnReconnect: true,
-      // dedupingInterval: 2000,
-      // errorRetryCount: 3,
     }
   );
 
@@ -29,12 +27,6 @@ export function usePostData() {
   const { trigger, isMutating } = useSWRMutation(
     'https://jsonplaceholder.typicode.com/posts',
     mutationFetcher,
-    {
-      onSuccess: () => {
-        // Optional: Invalidate user cache if needed
-        // mutate("https://jsonplaceholder.typicode.com/users");
-      },
-    }
   );
 
   return { triggerPost: trigger, isSubmitting: isMutating };
