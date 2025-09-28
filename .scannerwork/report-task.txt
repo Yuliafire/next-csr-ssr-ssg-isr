@@ -1,0 +1,7 @@
+organization=yuliafire
+projectKey=Yuliafire_next-csr-ssr-ssg-isr
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.67816
+dashboardUrl=https://sonarcloud.io/dashboard?id=Yuliafire_next-csr-ssr-ssg-isr
+ceTaskId=AZmRCborduYuB-oX8hPE
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZmRCborduYuB-oX8hPE

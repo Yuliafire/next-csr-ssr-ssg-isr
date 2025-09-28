@@ -54,16 +54,28 @@ export default function Modal({
   return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-      onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+        style={{ cursor: 'pointer' }}
+        aria-label="Close modal by clicking outside"
+      /> 
+      <div
         ref={modalRef}
         className="bg-gradient-to-br from-blue-300 to-blue-900 rounded-lg p-12 max-w-md w-full relative shadow-lg"
         onClick={(e) => e.stopPropagation()}
-        tabIndex={-1}
+        tabIndex={0}
+        role="document"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClose();
+          }
+        }}
       >
         {title && (
           <h2
