@@ -22,8 +22,8 @@ export default function ClientPage({
 }: ClientPageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleFormSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(`Form submitted from ${pageType}:`, data);
+  const handleFormSubmit: SubmitHandler<FormData> = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -48,7 +48,7 @@ export default function ClientPage({
           onClick={() => setIsModalOpen(true)}
           className="mt-6 bg-white text-blue-600 px-6 py-3 rounded-full font-semibold shadow-md hover:bg-blue-100 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
         >
-          Open Modal to Submit Data
+         Submit Data
         </motion.button>
       </motion.section>
 
