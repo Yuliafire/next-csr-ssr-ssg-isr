@@ -29,7 +29,7 @@ export default function Home() {
         transition={{ duration: 0.3 }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {[... new Array(10)].map((_, index) => (
+        {[...new Array(10)].map((_, index) => (
           <motion.div
             key={`skeleton-${index}`}
             className="bg-white p-6 rounded-lg shadow-md animate-pulse"

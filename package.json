@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack --port 3008",
+    "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "lint": "eslint --fix .",
     "format:fix": "prettier --write .",
@@ -36,6 +36,5 @@
     "prettier": "^3.6.2",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "homepage": "https://yuliafire.github.io/next-csr-ssr-ssg-isr"
+  }
 }

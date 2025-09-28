@@ -63,7 +63,7 @@ export default function Modal({
         onClick={onClose}
         style={{ cursor: 'pointer' }}
         aria-label="Close modal by clicking outside"
-      /> 
+      />
       <div
         ref={modalRef}
         className="bg-gradient-to-br from-blue-300 to-blue-900 rounded-lg p-12 max-w-md w-full relative shadow-lg"

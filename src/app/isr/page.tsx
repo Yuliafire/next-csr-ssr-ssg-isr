@@ -1,6 +1,6 @@
 import { fetchUsers } from '@/lib/api';
 import type { User } from '@/types';
-import ClientPage from '@/components/pages/client/ClientPage';
+import ClientPage from '@/components/pages/ClientPage';
 
 export const revalidate = 60;
 
