@@ -36,5 +36,5 @@ A Next.js application demonstrating different rendering strategies—Client-Side
 3. Run the development server
    `npm run dev`
 
-4. build the app:
+4. Build the app:
    `npm run build`

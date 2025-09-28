@@ -8,7 +8,7 @@ const fileValidation = yup
     'Max 2MB',
     (value) => !value?.[0]?.size || value[0].size <= 2 * 1024 * 1024
   )
-  
+
   .test(
     'type',
     'JPEG/PNG/PDF only',
@@ -17,7 +17,7 @@ const fileValidation = yup
       value[0] &&
       ['image/jpeg', 'image/png', 'application/pdf'].includes(value[0].type)
   );
-  
+
 export const formSchema: yup.ObjectSchema<FormData> = yup.object().shape({
   text: yup
     .string()
