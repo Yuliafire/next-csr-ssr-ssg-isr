@@ -17,7 +17,7 @@ export default function Home() {
   const handleFormSubmit: SubmitHandler<FormData> = (data) => {
     console.log('Form submitted from Home:', data);
   };
-  //
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
       <Toaster position="top-right" />

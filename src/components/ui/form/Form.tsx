@@ -2,51 +2,10 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { useState } from 'react';
+import { formSchema } from './schema';
 import toast from 'react-hot-toast';
 import type { FormData } from '@/types';
-
 import { usePostData } from '@/lib/hooks';
-
-const formSchema = yup.object().shape({
-  text: yup
-    .string()
-    .required('Text is required')
-    .min(3, 'At least 3 characters'),
-  file1: yup
-    .mixed<FileList>()
-    .required('File 1 required')
-    .test(
-      'size',
-      'Max 2MB',
-      (value) => value && value[0] && value[0].size <= 2 * 1024 * 1024
-    )
-    .test(
-      'type',
-      'JPEG/PNG/PDF only',
-      (value) =>
-        value &&
-        value[0] &&
-        ['image/jpeg', 'image/png', 'application/pdf'].includes(value[0].type)
-    ),
-  file2: yup
-    .mixed<FileList>()
-    .required('File 2 required')
-    .test(
-      'size',
-      'Max 2MB',
-      (value) => value && value[0] && value[0].size <= 2 * 1024 * 1024
-    )
-    .test(
-      'type',
-      'JPEG/PNG/PDF only',
-      (value) =>
-        value &&
-        value[0] &&
-        ['image/jpeg', 'image/png', 'application/pdf'].includes(value[0].type)
-    ),
-});
 
 interface FormProps {
   readonly onSubmit: SubmitHandler<FormData>;
@@ -67,11 +26,7 @@ export default function Form({ onSubmit }: FormProps) {
     },
   });
 
-  const { triggerPost, isSubmitting: isMutating } = usePostData();
-
-  const [response, setResponse] = useState<Record<string, unknown> | null>(
-    null
-  );
+  const { isSubmitting: isMutating } = usePostData();
 
   const handleFormSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     const formData = new FormData();
@@ -79,8 +34,6 @@ export default function Form({ onSubmit }: FormProps) {
     if (data.file1[0]) formData.append('file1', data.file1[0]);
     if (data.file2[0]) formData.append('file2', data.file2[0]);
 
-    const result = await triggerPost(formData);
-    setResponse(result);
     onSubmit(data);
     toast.success('Profile updated successfully!', {
       duration: 4000,
@@ -96,7 +49,7 @@ export default function Form({ onSubmit }: FormProps) {
           htmlFor="text"
           className="text-sm font-medium text-gray-900 mb-1"
         >
-          Bio (Text)
+          Bio
         </label>
         <input
           id="text"
@@ -166,11 +119,6 @@ export default function Form({ onSubmit }: FormProps) {
       >
         {isSubmitting || isMutating ? 'Submitting...' : 'Send POST'}
       </button>
-      {response && (
-        <pre className="mt-4 text-sm bg-gray-100 p-2 rounded overflow-auto">
-          {JSON.stringify(response, null, 2)}
-        </pre>
-      )}
     </form>
   );
 }
