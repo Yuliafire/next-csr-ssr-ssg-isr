@@ -9,7 +9,7 @@ export const mutationFetcher = async (
 ) => {
   const res = await fetch(url, {
     method: 'POST',
-    body: arg, 
+    body: arg,
   });
   if (!res.ok) {
     const errorData = await res.text();

@@ -33,7 +33,6 @@ export default function Form({ onSubmit }: FormProps) {
     formData.append('text', data.text);
     if (data.file1[0]) formData.append('file1', data.file1[0]);
     if (data.file2[0]) formData.append('file2', data.file2[0]);
-
     onSubmit(data);
     toast.success('Profile updated successfully!', {
       duration: 4000,
